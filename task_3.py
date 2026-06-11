@@ -3,8 +3,9 @@ class PointsForPlace:
         points = 0
         validation = PointsForPlace.validation_place(place)
         if validation is not True:
-            return validation
-        points += 101 - place
+            print(validation)
+        else:
+            points += 101 - place
         return points
 
     @staticmethod
@@ -21,8 +22,9 @@ class PointsForMeters:
         points = 0
         validation = PointsForMeters.validation_meters(meters)
         if validation is not True:
-            return validation
-        points = meters * 0.5
+            print(validation)
+        else:
+            points = meters * 0.5
         return points
     
     @staticmethod
@@ -34,12 +36,12 @@ class PointsForMeters:
 class TotalPoints(PointsForPlace, PointsForMeters):
     def get_total_points(self, place, meters):
         # Уходим от ошибки сложения разных типов
-        place_validation = self.validation_place(place)
-        if place_validation is not True:
-            return place_validation
-        meters_validation = self.validation_meters(meters)
-        if meters_validation is not True:
-            return meters_validation
+        #place_validation = self.validation_place(place)
+        #if place_validation is not True:
+            #return place_validation
+        #meters_validation = self.validation_meters(meters)
+        #if meters_validation is not True:
+            #return meters_validation
         total = super().get_points_for_place(place) + super().get_points_for_meters(meters)
         return total
 
@@ -50,4 +52,4 @@ print(points_for_meters.get_points_for_meters(7))
 total_points = TotalPoints()
 print(total_points.get_points_for_place(100))
 print(total_points.get_points_for_meters(10))
-print(total_points.get_total_points(100, 10))
+print(total_points.get_total_points(-100, -10))
